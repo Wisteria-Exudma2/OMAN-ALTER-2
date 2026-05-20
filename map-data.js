@@ -30,7 +30,7 @@ const WORLD_MAPS = {
         color: '#d4a843',
         faction: 'aurelian',
         bounds: { startCol: 'A', endCol: 'E', startRow: 1, endRow: 10 },
-        linkedMapId: 'aurelian-nw-territory',
+        linkedMapId: 'https://hyutzatopojxwpyvdclp.supabase.co/storage/v1/object/public/OMAN%20IMG/AURELIAN%20EMPIRE%20MAP.png',
         description: 'Kerajaan emas yang mengusai gurun barat. Wilayah yang kaya namun keras.',
         majorCities: ['Solaris Prime', 'Helios Gate', 'Radiance'],
       },
