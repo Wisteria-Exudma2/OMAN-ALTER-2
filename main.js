@@ -850,10 +850,9 @@ function renderSkillDisplay(type) {
         </div>
       </div>`;
   } else {
-    area.innerHTML = `
-<div class="sgd-intro">
-        Magic atau Skill di Dunia OMAN memang dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
-        namun wajib mengikuti aturan tipe, AP cost, dan formula yang berlaku.
+    area.innerHTML = 
+      <div class="sgd-intro">Magic atau Skill di Dunia OMAN memang dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
+       namun wajib mengikuti aturan tipe, AP cost, dan formula yang berlaku.
       </div>
       <div class="sgd-grid">
         ${SKILL_GUIDE_DATA.map(s => `
