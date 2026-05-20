@@ -1,6 +1,6 @@
 /* ============================================================
    MAIN.JS — OMAN WEBSITE
-   SPA Navigation + Space Canvas + RA World Clock + Map System
+  SPA Navigation + Space Canvas + RA World Clock + Map System
    ============================================================ */
 
 'use strict';
