@@ -852,7 +852,7 @@ function renderSkillDisplay(type) {
   } else {
     area.innerHTML = `
 <div class="sgd-intro">
-        Skill di OMAN dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
+        Magic atau Skill di Dunia OMAN memang dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
         namun wajib mengikuti aturan tipe, AP cost, dan formula yang berlaku.
       </div>
       <div class="sgd-grid">
