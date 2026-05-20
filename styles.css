@@ -971,6 +971,103 @@ body {
 }
 .skill-slot-detail { font-size: 0.72rem; color: var(--text-dim); }
 
+/* ─── SKILL UNLOCK TABLE ─────────────────────────────────────── */
+.skill-unlock-section {
+  margin-bottom: 32px;
+}
+
+.skill-unlock-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(212,168,67,0.5);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.skill-unlock-title-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 0 8px rgba(212,168,67,0.6));
+}
+
+.skill-unlock-table {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.skill-unlock-row {
+  display: grid;
+  grid-template-columns: 72px 44px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(10, 14, 24, 0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background var(--transition);
+  cursor: default;
+}
+
+.skill-unlock-row.alt {
+  background: rgba(16, 22, 36, 0.75);
+}
+
+.skill-unlock-row:last-child {
+  border-bottom: none;
+}
+
+.skill-unlock-row:hover {
+  background: rgba(212, 168, 67, 0.05);
+}
+
+.skill-unlock-lv {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.skill-unlock-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skill-unlock-type-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.skill-unlock-desc {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: var(--text);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 600px) {
+  .skill-unlock-row {
+    grid-template-columns: 56px 36px 1fr;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .skill-unlock-lv { font-size: 0.5rem; }
+  .skill-unlock-desc { font-size: 0.45rem; }
+  .skill-unlock-icon-wrap { width: 30px; height: 30px; }
+  .skill-unlock-type-icon { font-size: 0.9rem; }
+}
+
 /* ─── CALCULATOR ─────────────────────────────────────────────── */
 .calc-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 640px) { .calc-form { grid-template-columns: 1fr; } }
