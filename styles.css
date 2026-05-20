@@ -976,6 +976,179 @@ body {
   margin-bottom: 32px;
 }
 
+/* ─── SKILL GUIDE (PANDUAN) CARDS ───────────────────────────── */
+.sgd-intro {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+/* Responsive grid — 3 col → 2 col → 1 col */
+.sgd-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+@media (max-width: 1024px) { .sgd-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .sgd-grid { grid-template-columns: 1fr; } }
+/* Individual card */
+.sgd-card {
+  background: rgba(10, 13, 22, 0.92);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 4px solid;               /* color set inline */
+  border-radius: 12px;
+  padding: 20px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.sgd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+/* Card header: icon + title + cost */
+.sgd-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.sgd-icon-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sgd-icon { font-size: 1.3rem; line-height: 1; }
+.sgd-header-info { flex: 1; }
+.sgd-title {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  line-height: 1.75;
+  letter-spacing: 0.03em;
+  margin-bottom: 5px;
+}
+.sgd-cost {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+/* Italic tagline with left accent bar */
+.sgd-tagline {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  font-style: italic;
+  line-height: 1.8;
+  border-left: 3px solid;
+  padding-left: 10px;
+  margin-bottom: 14px;
+}
+/* Section labels */
+.sgd-section-label {
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+/* Karakteristik bullet list */
+.sgd-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4px;
+  flex: 1;
+}
+.sgd-list-item {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--text);
+  line-height: 2.1;
+  letter-spacing: 0.02em;
+}
+/* Contoh skill examples */
+.sgd-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 2px;
+}
+.sgd-example {
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.43rem;
+  line-height: 1.9;
+  color: var(--text-dim);
+}
+.sgd-class-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.43rem;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-right: 5px;
+}
+.sgd-skill-name {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--text-bright);
+  font-weight: 700;
+}
+.sgd-skill-sep {
+  color: var(--text-dim);
+  margin: 0 4px;
+}
+.sgd-skill-desc {
+  color: var(--text-dim);
+  font-size: 0.43rem;
+}
+/* Format box at bottom */
+.sgd-format-box {
+  background: rgba(212,168,67,0.05);
+  border: 1px solid rgba(212,168,67,0.2);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-top: 4px;
+}
+.sgd-format-title {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+}
+.sgd-format-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
+}
+.sgd-format-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  line-height: 2;
+}
+.sgd-format-key {
+  color: var(--gold);
+  white-space: nowrap;
+  min-width: 80px;
+}
+.sgd-format-val { color: var(--text-dim); }
+
 .skill-unlock-title {
   display: flex;
   align-items: center;
