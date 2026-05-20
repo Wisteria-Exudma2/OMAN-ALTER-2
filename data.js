@@ -610,4 +610,3 @@ const SKILL_GUIDE_DATA = [
     ],
   },
 ];
-
