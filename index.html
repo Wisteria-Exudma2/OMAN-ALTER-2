@@ -104,6 +104,44 @@
         </div>
       </div>
 
+      <!-- ═══════════════════════════════════════════════════
+           INTERACTIVE WORLD MAP SECTION
+      ═══════════════════════════════════════════════════ -->
+      <div class="map-section" id="map-section">
+        <div class="home-section-label" style="margin-bottom: 32px;">
+          <span class="home-section-label-text">🗺️ JELAJAHI PETA DUNIA</span>
+        </div>
+
+        <!-- Map Tabs -->
+        <div class="map-tabs" id="map-tabs">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Map Display Area -->
+        <div class="map-display-container" id="map-display-container">
+          <div class="map-viewer">
+            <div class="map-image-wrapper" id="map-image-wrapper">
+              <img id="map-image" src="" alt="World Map" class="map-image" />
+              <div id="map-overlay" class="map-overlay"></div>
+            </div>
+            <div class="map-sidebar" id="map-sidebar">
+              <div class="map-info-panel">
+                <div class="map-title" id="map-title">OMAN WORLD MAP</div>
+                <div class="map-subtitle" id="map-subtitle">Dunia penuh petualangan</div>
+                <div class="map-legend" id="map-legend">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Region Cards -->
+        <div class="map-regions-grid" id="map-regions-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
       <!-- RA World Clock -->
       <div class="ra-clock-section" id="ra-clock-section">
         <div class="home-section-label" style="margin-bottom: 32px;">
@@ -391,6 +429,7 @@
 </div><!-- /#app -->
 
 <script src="data.js"></script>
+<script src="map-data.js"></script>
 <script src="main.js"></script>
 <script src="calculator.js"></script>
 </body>
