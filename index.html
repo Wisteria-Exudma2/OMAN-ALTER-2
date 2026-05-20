@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OMAN — Open World Adventure & Mystery</title>
+  <meta name="description" content="Portal resmi OMAN RPG — sistem class, ras, leveling, ekonomi, faksi, quest, equipment, skill, dan kalkulator karakter." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
+</head>
+<body>
+
+<!-- SPACE CANVAS (background animated) -->
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+
+<div id="app">
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Navigasi Utama">
+    <div class="navbar-logo">⚔ OMAN</div>
+    <div class="navbar-nav">
+      <button class="nav-btn active" data-page="home"      id="nav-home">HOME</button>
+      <button class="nav-btn"        data-page="class"     id="nav-class">CLASS</button>
+      <button class="nav-btn"        data-page="ras"       id="nav-ras">RAS</button>
+      <button class="nav-btn"        data-page="leveling"  id="nav-leveling">LEVELING</button>
+      <button class="nav-btn"        data-page="ekonomi"   id="nav-ekonomi">EKONOMI</button>
+      <button class="nav-btn"        data-page="faksi"     id="nav-faksi">FAKSI</button>
+      <button class="nav-btn"        data-page="quest"     id="nav-quest">QUEST</button>
+      <button class="nav-btn"        data-page="equipment" id="nav-equipment">EQUIPMENT</button>
+      <button class="nav-btn"        data-page="skill"     id="nav-skill">SKILL</button>
+      <button class="nav-btn"        data-page="kalkulator"id="nav-kalkulator">KALKULATOR</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: HOME
+  ═══════════════════════════════════════════════════ -->
+  <section class="page active" id="page-home" role="main">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">✦ OPEN WORLD ADVENTURE & MYSTERY ✦</div>
+      <h1 class="hero-title">Selamat Datang di<br><span>Dunia OMAN</span></h1>
+      <p class="hero-subtitle">Petualangan epik menunggumu — pilih class, ras, faksi, dan ukir legendamu sendiri di dunia fantasi penuh misteri.</p>
+      <div class="hero-cta">
+        <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener" class="btn-primary" id="btn-join-wa">💬 Bergabung Sekarang</a>
+        <button class="btn-secondary" id="btn-explore" onclick="navigateTo('class')">⚔️ Jelajahi Dunia</button>
+      </div>
+    </div>
+
+    <!-- Stats Band -->
+    <div class="stats-band">
+      <div class="stats-band-inner">
+        <div>
+          <span class="stat-counter-num" data-target="200" id="counter-member">0</span>
+          <span class="stat-counter-label">+ MEMBER AKTIF</span>
+        </div>
+        <div>
+          <span class="stat-counter-num" data-target="5" id="counter-class">0</span>
+          <span class="stat-counter-label">CLASS TERSEDIA</span>
+        </div>
+        <div>
+          <span class="stat-counter-num" data-target="10" id="counter-ras">0</span>
+          <span class="stat-counter-label">RAS UNIK</span>
+        </div>
+        <div>
+          <span class="stat-counter-num" data-target="7" id="counter-faksi">0</span>
+          <span class="stat-counter-label">FAKSI & WILAYAH</span>
+        </div>
+        <div>
+          <span class="stat-counter-num" data-target="50" id="counter-quest">0</span>
+          <span class="stat-counter-label">+ QUEST AKTIF</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main content section -->
+    <div class="section">
+      <!-- Overview Cards -->
+      <div class="home-section-label">
+        <span class="home-section-label-text">JELAJAHI DUNIA OMAN</span>
+      </div>
+      <div class="overview-cards">
+        <div class="overview-card" onclick="navigateTo('class')" id="card-class">
+          <div class="overview-card-icon">⚔️</div>
+          <div class="overview-card-title">CLASS SYSTEM</div>
+          <div class="overview-card-desc">5 class unik — Warrior, Mage, Archer, Priest, Guardian</div>
+        </div>
+        <div class="overview-card" onclick="navigateTo('ras')" id="card-ras">
+          <div class="overview-card-icon">🧬</div>
+          <div class="overview-card-title">RAS SYSTEM</div>
+          <div class="overview-card-desc">10 ras dengan trait dan bonus stat berbeda</div>
+        </div>
+        <div class="overview-card" onclick="navigateTo('leveling')" id="card-leveling">
+          <div class="overview-card-icon">📈</div>
+          <div class="overview-card-title">LEVELING</div>
+          <div class="overview-card-desc">Level 1–100 dengan rank dan unlock bertahap</div>
+        </div>
+        <div class="overview-card" onclick="navigateTo('ekonomi')" id="card-ekonomi">
+          <div class="overview-card-icon">💰</div>
+          <div class="overview-card-title">EKONOMI</div>
+          <div class="overview-card-desc">Mata uang Zen, tier kekayaan, dan pasar bebas</div>
+        </div>
+      </div>
+
+      <!-- RA World Clock -->
+      <div class="ra-clock-section" id="ra-clock-section">
+        <div class="home-section-label" style="margin-bottom: 32px;">
+          <span class="home-section-label-text">⏰ WAKTU DUNIA OMAN</span>
+        </div>
+
+        <!-- Main clock display -->
+        <div class="ra-clock-main" id="ra-clock-main">
+          <div class="ra-clock-header">✦ OMAN WORLD TIME — KALENDER RA ✦</div>
+
+          <!-- Digital Clock -->
+          <div class="ra-digital-clock" id="ra-digital-clock">
+            <div class="ra-time-block">
+              <div class="ra-time-digits" id="ra-hours">00</div>
+              <div class="ra-time-label">JAM</div>
+            </div>
+            <div class="ra-time-sep">:</div>
+            <div class="ra-time-block">
+              <div class="ra-time-digits" id="ra-minutes">00</div>
+              <div class="ra-time-label">MENIT</div>
+            </div>
+            <div class="ra-time-sep">:</div>
+            <div class="ra-time-block">
+              <div class="ra-time-digits" id="ra-seconds">00</div>
+              <div class="ra-time-label">DETIK</div>
+            </div>
+          </div>
+
+          <!-- Date & Day -->
+          <div class="ra-date-display" id="ra-date-display">
+            Yawm al-Zuhrah, 20 Mizanun
+          </div>
+          <div class="ra-date-year" id="ra-date-year">Tahun 2500 RA ✦ Era Bintang</div>
+          <div class="ra-month-meaning" id="ra-month-meaning">Mizanun — Neraca Langit</div>
+        </div>
+
+        <!-- Faction Timezone Grid -->
+        <div class="home-section-label" style="margin-bottom: 20px;">
+          <span class="home-section-label-text">⚑ WAKTU PER FAKSI</span>
+        </div>
+        <div class="faction-tz-grid" id="faction-tz-grid">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Mini RA Calendar -->
+        <div class="home-section-label" style="margin-bottom: 20px;">
+          <span class="home-section-label-text">📅 KALENDER BULAN INI</span>
+        </div>
+        <div class="ra-mini-calendar">
+          <div class="ra-cal-header">
+            <div>
+              <div class="ra-cal-month-name" id="ra-cal-month-name">Mizanun</div>
+              <div class="ra-cal-year" id="ra-cal-year-label">Tahun 2500 RA</div>
+            </div>
+            <div style="font-size:1.4rem; opacity:0.6;" id="ra-cal-symbol">⚖</div>
+          </div>
+          <div class="ra-cal-grid" id="ra-cal-grid">
+            <!-- Day headers -->
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Join Section -->
+      <div class="join-section" id="join-section">
+        <div class="home-section-label" style="margin-bottom: 32px;">
+          <span class="home-section-label-text">🚀 CARA BERGABUNG</span>
+        </div>
+        <div class="join-steps">
+          <div class="join-step" id="join-step-1">
+            <div class="join-step-num">01</div>
+            <div class="join-step-title">Masuk Grup WhatsApp</div>
+            <div class="join-step-desc">Klik link undangan dan masuk ke grup utama OMAN RPG.</div>
+          </div>
+          <div class="join-step" id="join-step-2">
+            <div class="join-step-num">02</div>
+            <div class="join-step-title">Buat Karakter</div>
+            <div class="join-step-desc">Pilih Ras & Class favoritmu menggunakan Kalkulator Karakter di website ini.</div>
+          </div>
+          <div class="join-step" id="join-step-3">
+            <div class="join-step-num">03</div>
+            <div class="join-step-title">Mulai Petualangan</div>
+            <div class="join-step-desc">Bergabung dengan faksi, ikuti quest, dan tulis legendamu!</div>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 40px;">
+          <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener" class="btn-primary" id="btn-join-bottom">
+            💬 Gabung Grup WhatsApp
+          </a>
+        </div>
+      </div>
+    </div><!-- /section -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: CLASS
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-class">
+    <div class="section">
+      <h2 class="section-title">CLASS SYSTEM</h2>
+      <p class="section-sub">Pilih class yang mencerminkan jiwa petualanganmu</p>
+      <div class="tabs" id="class-tabs">
+        <button class="tab-btn active" data-class="warrior" id="tab-class-warrior">⚔️ WARRIOR</button>
+        <button class="tab-btn"        data-class="mage"    id="tab-class-mage">✨ MAGE</button>
+        <button class="tab-btn"        data-class="archer"  id="tab-class-archer">🏹 ARCHER</button>
+        <button class="tab-btn"        data-class="priest"  id="tab-class-priest">✝️ PRIEST</button>
+        <button class="tab-btn"        data-class="guardian"id="tab-class-guardian">🛡️ GUARDIAN</button>
+      </div>
+      <div id="class-display-area"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: RAS
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-ras">
+    <div class="section">
+      <h2 class="section-title">RAS SYSTEM</h2>
+      <p class="section-sub">10 ras dengan trait unik yang membentuk karakter dan playstyle-mu</p>
+      <div class="race-grid" id="race-grid"></div>
+      <div id="race-detail-area" style="margin-top: 32px;"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: LEVELING
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-leveling">
+    <div class="section">
+      <h2 class="section-title">LEVELING SYSTEM</h2>
+      <p class="section-sub">Cara mendapat EXP dan sistem kenaikan level di OMAN</p>
+
+      <!-- EXP Sources -->
+      <div class="grid-4 mb-32">
+        <div class="card text-center">
+          <div style="font-size:2rem; margin-bottom:10px;">📜</div>
+          <div style="font-family: var(--font-ui); font-size:0.75rem; font-weight:700; color:var(--text-bright); margin-bottom:6px;">QUEST</div>
+          <div style="font-size:0.78rem; color:var(--text-dim);">Selesaikan quest harian & mingguan</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem; margin-bottom:10px;">⚔️</div>
+          <div style="font-family: var(--font-ui); font-size:0.75rem; font-weight:700; color:var(--text-bright); margin-bottom:6px;">PVP & DUNGEON</div>
+          <div style="font-size:0.78rem; color:var(--text-dim);">Menang PvP dan clear dungeon</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem; margin-bottom:10px;">🎭</div>
+          <div style="font-family: var(--font-ui); font-size:0.75rem; font-weight:700; color:var(--text-bright); margin-bottom:6px;">ROLEPLAY AKTIF</div>
+          <div style="font-size:0.78rem; color:var(--text-dim);">Aktif bercerita dan berinteraksi</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem; margin-bottom:10px;">🏰</div>
+          <div style="font-family: var(--font-ui); font-size:0.75rem; font-weight:700; color:var(--text-bright); margin-bottom:6px;">GUILD EVENT</div>
+          <div style="font-size:0.78rem; color:var(--text-dim);">Partisipasi event guild</div>
+        </div>
+      </div>
+
+      <!-- Level Table -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div style="padding:20px 24px; border-bottom:1px solid var(--dark-border);">
+          <div style="font-family:var(--font-ui); font-size:0.75rem; font-weight:700; color:var(--gold); letter-spacing:0.1em;">TABEL LEVEL 1–100</div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="level-table">
+            <thead>
+              <tr>
+                <th>LEVEL</th>
+                <th>RANK</th>
+                <th>EXP DIBUTUHKAN</th>
+                <th>BONUS UNLOCK</th>
+              </tr>
+            </thead>
+            <tbody id="level-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="grid-4 mt-32">
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:10px;">🗺️</div>
+          <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--gold);margin-bottom:8px;">AREA BARU</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);">Buka zona dan dungeon yang lebih menantang</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:10px;">📊</div>
+          <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--gold);margin-bottom:8px;">STAT BOOST</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);">Dapatkan poin stat untuk alokasi bebas</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:10px;">✨</div>
+          <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--gold);margin-bottom:8px;">SKILL BARU</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);">Buka slot skill di level tertentu</div>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:10px;">🏆</div>
+          <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--gold);margin-bottom:8px;">TITLE EKSKLUSIF</div>
+          <div style="font-size:0.78rem;color:var(--text-dim);">Dapatkan gelar bergengsi di level milestone</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: EKONOMI
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-ekonomi">
+    <div class="section">
+      <h2 class="section-title">ECONOMY SYSTEM</h2>
+      <p class="section-sub">Mata uang Zen menggerakkan roda perekonomian dunia OMAN</p>
+      <div id="ekonomi-content"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: FAKSI
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-faksi">
+    <div class="section">
+      <h2 class="section-title">FACTION SYSTEM</h2>
+      <p class="section-sub">7 faksi besar yang mewarnai politik dan petualangan di OMAN</p>
+      <div class="tabs" id="faction-tabs"></div>
+      <div id="faction-display-area"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: QUEST
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-quest">
+    <div class="section">
+      <h2 class="section-title">QUEST SYSTEM</h2>
+      <p class="section-sub">Selesaikan quest untuk mendapatkan EXP, Zen, dan item langka</p>
+      <div class="tabs" id="quest-tabs">
+        <button class="tab-btn active" data-quest="daily"   id="tab-quest-daily">📅 HARIAN</button>
+        <button class="tab-btn"        data-quest="weekly"  id="tab-quest-weekly">📆 MINGGUAN</button>
+        <button class="tab-btn"        data-quest="story"   id="tab-quest-story">📖 STORY QUEST</button>
+        <button class="tab-btn"        data-quest="guild"   id="tab-quest-guild">🏰 GUILD QUEST</button>
+      </div>
+      <div id="quest-display-area"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: EQUIPMENT
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-equipment">
+    <div class="section">
+      <h2 class="section-title">EQUIPMENT & ITEM</h2>
+      <p class="section-sub">5 tier rarity dan 6 slot equipment membentuk build karaktermu</p>
+      <div id="equipment-content"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: SKILL
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-skill">
+    <div class="section">
+      <h2 class="section-title">SKILL SYSTEM</h2>
+      <p class="section-sub">Log Horizon Style — 8 slot skill dengan tipe dan aturan berbeda</p>
+      <div class="tabs" id="skill-tabs">
+        <button class="tab-btn active" data-skill="system"  id="tab-skill-system">⚡ SKILL SYSTEM</button>
+        <button class="tab-btn"        data-skill="panduan" id="tab-skill-panduan">📖 PANDUAN BUAT SKILL</button>
+      </div>
+      <div id="skill-display-area"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE: KALKULATOR
+  ═══════════════════════════════════════════════════ -->
+  <section class="page" id="page-kalkulator">
+    <div class="section">
+      <h2 class="section-title">KALKULATOR KARAKTER</h2>
+      <p class="section-sub">Hitung dan simpan stat karakter OMAN-mu</p>
+      <div class="tabs" id="calc-tabs">
+        <button class="tab-btn active" data-calc="stat"   id="tab-calc-stat">📊 STAT KALKULATOR</button>
+        <button class="tab-btn"        data-calc="battle" id="tab-calc-battle">⚔️ BATTLE SIMULATOR</button>
+        <button class="tab-btn"        data-calc="list"   id="tab-calc-list">📋 DAFTAR KARAKTER</button>
+      </div>
+      <div id="calc-display-area"></div>
+    </div>
+  </section>
+
+</div><!-- /#app -->
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script src="calculator.js"></script>
+</body>
+</html>
