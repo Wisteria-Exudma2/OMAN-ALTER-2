@@ -1,6 +1,6 @@
 /* ============================================================
    MAIN.JS — OMAN WEBSITE
-   SPA Navigation + Space Canvas + RA World Clock + All Pages
+   SPA Navigation + Space Canvas + RA World Clock + Map System
    ============================================================ */
 
 'use strict';
@@ -83,17 +83,11 @@ function renderPage(pageId) {
   function buildConstellations() {
     constellations = [];
     const patterns = [
-      // Orion-like
       [[0.12,0.15],[0.14,0.20],[0.10,0.25],[0.16,0.25],[0.13,0.30],[0.11,0.35],[0.15,0.35]],
-      // Cassiopeia-like
       [[0.75,0.08],[0.79,0.12],[0.83,0.08],[0.87,0.13],[0.91,0.09]],
-      // Big Dipper
       [[0.30,0.55],[0.34,0.52],[0.38,0.52],[0.42,0.55],[0.42,0.60],[0.46,0.61],[0.50,0.60]],
-      // Southern Cross
       [[0.60,0.70],[0.64,0.74],[0.60,0.78],[0.56,0.74],[0.60,0.74]],
-      // Pleiades cluster
       [[0.20,0.68],[0.23,0.65],[0.26,0.67],[0.22,0.70],[0.25,0.72],[0.28,0.69]],
-      // Scorpius tail
       [[0.70,0.35],[0.73,0.38],[0.76,0.36],[0.79,0.40],[0.77,0.44],[0.73,0.46]],
     ];
     patterns.forEach(pts => {
@@ -107,7 +101,7 @@ function renderPage(pageId) {
   }
 
   function spawnShootingStar() {
-    const ang = (40 + Math.random()*10) * Math.PI/180; // 40–50°
+    const ang = (40 + Math.random()*10) * Math.PI/180;
     const sx  = Math.random() * W * 0.6;
     const sy  = Math.random() * H * 0.25;
     const len = 120 + Math.random() * 140;
@@ -251,12 +245,11 @@ function renderPage(pageId) {
 // ════════════════════════════════════════════════════════════
 // RA WORLD CLOCK + CALENDAR
 // ════════════════════════════════════════════════════════════
-const RA_TIME_OFFSET_H = 9;   // OMAN time = real WIB + 9 jam
-const RA_YEAR_OFF      = 474; // 2026 → 2500 RA
+const RA_TIME_OFFSET_H = 9;
+const RA_YEAR_OFF      = 474;
 
 function getRATime() {
   const now = new Date();
-  // Local time + 9 hours offset
   const omt = new Date(now.getTime() + RA_TIME_OFFSET_H * 3600 * 1000);
   return omt;
 }
@@ -264,9 +257,9 @@ function getRATime() {
 function getRADate(date) {
   return {
     year:    date.getUTCFullYear() + RA_YEAR_OFF,
-    month:   date.getUTCMonth(),       // 0-indexed
+    month:   date.getUTCMonth(),
     day:     date.getUTCDate(),
-    weekday: date.getUTCDay(),          // 0=Sun
+    weekday: date.getUTCDay(),
     hours:   date.getUTCHours(),
     minutes: date.getUTCMinutes(),
     seconds: date.getUTCSeconds(),
@@ -282,7 +275,6 @@ function updateRAClock() {
   const month   = RA_MONTHS[ra.month];
   const weekday = RA_DAYS[ra.weekday];
 
-  // Update clock digits
   const hEl = document.getElementById('ra-hours');
   const mEl = document.getElementById('ra-minutes');
   const sEl = document.getElementById('ra-seconds');
@@ -299,7 +291,6 @@ function updateRAClock() {
   document.getElementById('ra-month-meaning').textContent =
     `${month.symbol} ${month.name} — ${month.meaning}`;
 
-  // Update faction timezone clocks
   updateFactionClocks(omt);
 }
 
@@ -338,37 +329,29 @@ function renderRACalendar() {
   const ra  = getRADate(omt);
   const month = RA_MONTHS[ra.month];
 
-  // Update header
   document.getElementById('ra-cal-month-name').textContent = month.name;
   document.getElementById('ra-cal-year-label').textContent = `Tahun ${ra.year} RA`;
   document.getElementById('ra-cal-symbol').textContent = month.symbol;
 
-  // Day headers
   const dayHeaders = RA_DAYS.map(d =>
     `<div class="ra-cal-day-header" title="${d.name}">${d.short}</div>`
   ).join('');
 
-  // Days in month (real calendar)
   const year  = omt.getUTCFullYear();
   const month0= omt.getUTCMonth();
   const daysInMonth = new Date(year, month0 + 1, 0).getDate();
-  // First day of month (0=Sun)
   const firstDay = new Date(Date.UTC(year, month0, 1)).getUTCDay();
-  // Previous month days
   const prevDays = new Date(year, month0, 0).getDate();
 
   let cells = '';
 
-  // Fill prev month placeholders
   for (let i = firstDay - 1; i >= 0; i--) {
     cells += `<div class="ra-cal-cell other-month">${prevDays - i}</div>`;
   }
-  // Current month
   for (let d = 1; d <= daysInMonth; d++) {
     const isToday = d === ra.day;
     cells += `<div class="ra-cal-cell${isToday?' today':''}">${d}</div>`;
   }
-  // Next month fill
   const total = firstDay + daysInMonth;
   const rem   = total % 7 === 0 ? 0 : 7 - (total % 7);
   for (let d = 1; d <= rem; d++) {
@@ -384,7 +367,6 @@ function initRAClock() {
   updateRAClock();
   setInterval(() => {
     updateRAClock();
-    // Rebuild calendar at midnight
     const omt = getRATime();
     const ra  = getRADate(omt);
     if (ra.hours === 0 && ra.minutes === 0 && ra.seconds === 0) {
@@ -480,7 +462,6 @@ function renderClassDisplay(classKey) {
       </div>
     </div>`;
 
-  // Animate stat bars
   requestAnimationFrame(() => {
     area.querySelectorAll('.stat-bar-fill').forEach(bar => {
       bar.style.width = bar.dataset.width + '%';
@@ -565,7 +546,6 @@ function renderEkonomiPage() {
   if (area.innerHTML.trim()) return;
 
   area.innerHTML = `
-    <!-- Tier Cards -->
     <div class="grid-4 mb-32">
       ${ECONOMY_DATA.tiers.map(t => `
         <div class="card text-center" style="border-color:${t.color}33;">
@@ -578,7 +558,6 @@ function renderEkonomiPage() {
     </div>
 
     <div class="grid-2">
-      <!-- Cara Dapat -->
       <div class="card">
         <div style="font-family:var(--font-ui);font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:16px;">💎 CARA MENDAPAT ZEN</div>
         ${ECONOMY_DATA.earn.map(e => `
@@ -588,7 +567,6 @@ function renderEkonomiPage() {
           </div>
         `).join('')}
       </div>
-      <!-- Cara Pakai -->
       <div class="card">
         <div style="font-family:var(--font-ui);font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:16px;">💸 CARA MENGGUNAKAN ZEN</div>
         ${ECONOMY_DATA.spend.map(s => `
@@ -600,7 +578,6 @@ function renderEkonomiPage() {
       </div>
     </div>
 
-    <!-- Rules -->
     <div class="card mt-24" style="border-color:rgba(255,152,0,0.2);">
       <div style="font-family:var(--font-ui);font-size:0.7rem;letter-spacing:0.15em;color:#ffb74d;margin-bottom:16px;">⚠️ ATURAN EKONOMI</div>
       ${ECONOMY_DATA.rules.map((r,i) => `
@@ -728,7 +705,6 @@ function renderEquipmentPage() {
   if (area.innerHTML.trim()) return;
 
   area.innerHTML = `
-    <!-- Tier strips -->
     <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--text-dim);margin-bottom:12px;">ITEM RARITY TIER</div>
     <div class="tier-strip mb-32">
       ${EQUIPMENT_TIERS.map(t => `
@@ -747,7 +723,6 @@ function renderEquipmentPage() {
       `).join('')}
     </div>
 
-    <!-- Equipment Slots -->
     <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--text-dim);margin-bottom:12px;">EQUIPMENT SLOT (6 SLOT)</div>
     <div class="grid-3">
       ${EQUIPMENT_SLOTS.map(s => `
@@ -782,7 +757,6 @@ function renderSkillDisplay(type) {
   const area = document.getElementById('skill-display-area');
   if (type === 'system') {
     area.innerHTML = `
-      <!-- Slot Overview Cards -->
       <div style="font-family:var(--font-ui);font-size:0.62rem;letter-spacing:0.18em;color:var(--text-dim);margin-bottom:14px;">⚡ DISTRIBUSI 8 SKILL SLOT</div>
       <div class="skill-slot-grid" style="margin-bottom:40px;">
         ${SKILL_SYSTEM.slots.map(s => `
@@ -796,7 +770,6 @@ function renderSkillDisplay(type) {
         `).join('')}
       </div>
 
-      <!-- Unlock Per Level Table (styled like screenshot) -->
       <div class="skill-unlock-section">
         <div class="skill-unlock-title">
           <span class="skill-unlock-title-icon">🎯</span>
@@ -815,7 +788,6 @@ function renderSkillDisplay(type) {
         </div>
       </div>
 
-      <!-- Damage Formula -->
       <div class="grid-2 mt-24">
         <div class="card">
           <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px;">📐 FORMULA DAMAGE</div>
@@ -850,7 +822,6 @@ function renderSkillDisplay(type) {
         </div>
       </div>`;
   } else {
-    // ── PANDUAN PEMBUATAN SKILL ──────────────────────────────
     area.innerHTML = `
       <div class="sgd-intro">
         Skill di OMAN dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
@@ -860,7 +831,6 @@ function renderSkillDisplay(type) {
       <div class="sgd-grid">
         ${SKILL_GUIDE_DATA.map(s => `
           <div class="sgd-card" style="border-left-color:${s.color};">
-            <!-- Header -->
             <div class="sgd-header">
               <div class="sgd-icon-wrap" style="background:${s.colorDim};border-color:${s.color}44;">
                 <span class="sgd-icon">${s.icon}</span>
@@ -871,18 +841,15 @@ function renderSkillDisplay(type) {
               </div>
             </div>
 
-            <!-- Tagline -->
             <div class="sgd-tagline" style="border-left-color:${s.color};color:${s.color};">
               ${s.tagline.replace(/\n/g,'<br>')}
             </div>
 
-            <!-- Karakteristik -->
             <div class="sgd-section-label">KARAKTERISTIK</div>
             <ul class="sgd-list">
               ${s.karakteristik.map(k => `<li class="sgd-list-item">· ${k}</li>`).join('')}
             </ul>
 
-            <!-- Contoh Skill -->
             <div class="sgd-section-label" style="margin-top:14px;">CONTOH SKILL</div>
             <div class="sgd-examples">
               ${s.contohSkill.map(ex => `
@@ -898,7 +865,6 @@ function renderSkillDisplay(type) {
         `).join('')}
       </div>
 
-      <!-- Format box -->
       <div class="sgd-format-box">
         <div class="sgd-format-title">📋 FORMAT PENULISAN SKILL</div>
         <div class="sgd-format-body">
@@ -950,6 +916,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init RA Clock (always visible on home page)
   initRAClock();
+
+  // Init Map System
+  if (document.getElementById('map-tabs')) {
+    initMapSystem();
+  }
 
   // Render initial home page already rendered via HTML
   // Other pages rendered on navigation
