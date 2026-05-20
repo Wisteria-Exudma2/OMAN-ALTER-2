@@ -851,34 +851,60 @@ function renderSkillDisplay(type) {
       </div>`;
   } else {
     area.innerHTML = `
-      <div class="card">
-        <div style="font-family:var(--font-ui);font-size:0.8rem;font-weight:700;color:var(--gold);margin-bottom:16px;">📖 PANDUAN MEMBUAT SKILL</div>
-        <div style="font-size:0.85rem;line-height:1.8;color:var(--text);">
-          <p style="margin-bottom:16px;">Skill di OMAN dibuat berdasarkan <strong>imajinasi dan kreativitas</strong> player, tapi harus mengikuti aturan slot dan formula yang sudah ditentukan.</p>
-          ${SKILL_SYSTEM.slots.map(s => `
-            <div style="margin-bottom:16px;padding:14px;background:rgba(255,255,255,0.03);border:1px solid var(--dark-border);border-radius:10px;">
-              <div style="font-family:var(--font-ui);font-size:0.7rem;font-weight:700;color:var(--gold);margin-bottom:8px;">${s.icon} ${s.type.toUpperCase()} — ${s.slots} Slot (AP: ${s.ap}, Mana: ${s.mana})</div>
-              <div style="font-size:0.8rem;color:var(--text-dim);">${s.desc}</div>
-              <div style="margin-top:8px;font-size:0.78rem;">
-                Skill tipe ini harus mencerminkan kekuatan ${s.type === 'Wild' ? 'trik unik atau aksi di luar pertarungan normal' :
-                  s.type === 'Nova' ? 'serangan standar yang bisa digunakan setiap giliran' :
-                  s.type === 'Supernova' ? 'serangan kuat dengan efek tambahan (stun, bleed, dll)' :
-                  s.type === 'HyperNova' ? 'serangan paling powerful, AOE atau burst damage tinggi' :
-                  'kemampuan unik dan personal yang hanya bisa dibuka di Level 100'}.
+<div class="sgd-intro">
+        Skill di OMAN dibuat berdasarkan <span style="color:var(--gold);">imajinasi & kreativitas</span> player,
+        namun wajib mengikuti aturan tipe, AP cost, dan formula yang berlaku.
+      </div>
+      <div class="sgd-grid">
+        ${SKILL_GUIDE_DATA.map(s => `
+          <div class="sgd-card" style="border-left-color:${s.color};">
+            <!-- Header -->
+            <div class="sgd-header">
+              <div class="sgd-icon-wrap" style="background:${s.colorDim};border-color:${s.color}44;">
+                <span class="sgd-icon">${s.icon}</span>
+              </div>
+              <div class="sgd-header-info">
+                <div class="sgd-title" style="color:${s.color};">${s.title.replace(/\n/g,'<br>')}</div>
+                <div class="sgd-cost">${s.ap} · ${s.mana}</div>
               </div>
             </div>
-          `).join('')}
-          <div style="margin-top:16px;padding:16px;background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.2);border-radius:12px;">
-            <strong style="color:var(--gold);">Contoh format skill:</strong><br>
-            <div style="font-size:0.78rem;margin-top:8px;color:var(--text-dim);">
-              [Nama Skill] — [Tipe Aksi] — [Cost AP/Mana]<br>
-              Deskripsi: Apa yang dilakukan skill ini dalam narasi RP<br>
-              Efek game: Damage / Buff / Debuff yang diberikan<br>
-              Cooldown (jika ada): berapa ronde harus istirahat
+            <!-- Tagline -->
+            <div class="sgd-tagline" style="border-left-color:${s.color};color:${s.color};">
+              ${s.tagline.replace(/\n/g,'<br>')}
+            </div>
+            <!-- Karakteristik -->
+            <div class="sgd-section-label">KARAKTERISTIK</div>
+            <ul class="sgd-list">
+              ${s.karakteristik.map(k => `<li class="sgd-list-item">· ${k}</li>`).join('')}
+            </ul>
+            <!-- Contoh Skill -->
+            <div class="sgd-section-label" style="margin-top:14px;">CONTOH SKILL</div>
+            <div class="sgd-examples">
+              ${s.contohSkill.map(ex => `
+                <div class="sgd-example">
+                  <span class="sgd-class-tag" style="border-color:${s.color}55;color:${s.color};">[${ex.class}]</span>
+                  <span class="sgd-skill-name">${ex.name}</span>
+                  <span class="sgd-skill-sep">—</span>
+                  <span class="sgd-skill-desc">${ex.desc}</span>
+                </div>
+              `).join('')}
             </div>
           </div>
+      `).join('')}
+      </div>
+      <!-- Format box -->
+      <div class="sgd-format-box">
+        <div class="sgd-format-title">📋 FORMAT PENULISAN SKILL</div>
+        <div class="sgd-format-body">
+          <div class="sgd-format-row"><span class="sgd-format-key">Nama Skill</span><span class="sgd-format-val">— nama unik skill kamu</span></div>
+          <div class="sgd-format-row"><span class="sgd-format-key">Tipe Aksi</span><span class="sgd-format-val">— Nova / Supernova / HyperNova / Wild / Signature</span></div>
+          <div class="sgd-format-row"><span class="sgd-format-key">AP Cost</span><span class="sgd-format-val">— sesuai tipe aksi</span></div>
+          <div class="sgd-format-row"><span class="sgd-format-key">Deskripsi RP</span><span class="sgd-format-val">— apa yang dilakukan skill dalam narasi</span></div>
+          <div class="sgd-format-row"><span class="sgd-format-key">Efek Game</span><span class="sgd-format-val">— damage / buff / debuff / efek status</span></div>
+          <div class="sgd-format-row"><span class="sgd-format-key">Cooldown</span><span class="sgd-format-val">— berapa ronde istirahat (sesuai tipe)</span></div>
         </div>
-      </div>`;
+      </div>
+   </div>`;
   }
 }
 
