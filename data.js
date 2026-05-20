@@ -502,3 +502,112 @@ const ECONOMY_DATA = {
     "GM berhak freeze akun yang curang"
   ]
 };
+// ─── SKILL GUIDE DATA ─────────────────────────────────────────
+const SKILL_GUIDE_DATA = [
+  {
+    id: "nova",
+    title: "Aksi Normal /\nNova Action",
+    icon: "🛡️",
+    color: "#4fc3f7",
+    colorDim: "#4fc3f722",
+    ap: "2 AP",
+    mana: "No Mana",
+    tagline: "Basic Physical/Magical\nAction — Raw Damage",
+    karakteristik: [
+      "Murni damage fisik/mental tanpa efek tambahan",
+      "Damage: MIN 1+(0.8×STR/INT) — MAX 3+(0.8×STR/INT)",
+      "Single target only",
+      "Tidak ada cooldown",
+    ],
+    contohSkill: [
+      { class: "Warrior", name: "Basic Slash",  desc: "Tebasan pedang dasar" },
+      { class: "Archer",  name: "Quick Shot",   desc: "Panahan cepat" },
+      { class: "Mage",    name: "Energy Bolt",  desc: "Proyektil magic sederhana" },
+    ],
+  },
+  {
+    id: "supernova",
+    title: "Aksi Kuat /\nSupernova Action",
+    icon: "💥",
+    color: "#ff5252",
+    colorDim: "#ff525222",
+    ap: "3 AP",
+    mana: "Mid Mana (min 20)",
+    tagline: "Enhanced Attack with\nAdditional Effect",
+    karakteristik: [
+      "Damage menengah: MIN 3+(1.5×STR/INT) — MAX 5+(1.5×STR/INT)",
+      "Selalu disertai efek khusus (Slow, Stun, Def Break, dll)",
+      "Bisa single target atau AoE",
+      "Cooldown min 2, max 4 turn",
+    ],
+    contohSkill: [
+      { class: "Warrior", name: "Shield Bash",   desc: "Damage + Stun chance (Single)" },
+      { class: "Mage",    name: "Frost Nova",    desc: "Damage + Slow (AoE)" },
+      { class: "Archer",  name: "Poison Arrow",  desc: "Damage + Poison DoT (Single)" },
+    ],
+  },
+  {
+    id: "hypernova",
+    title: "Aksi Ultimate /\nHyperNova Action",
+    icon: "⚡",
+    color: "#ffd740",
+    colorDim: "#ffd74022",
+    ap: "4-5 AP",
+    mana: "High Mana (70-100%)",
+    tagline: "Sustained High-\nImpact Ability",
+    karakteristik: [
+      "Damage tinggi: MIN 10+(2×STR/INT) — MAX 30+(4×STR/INT)",
+      "Efek berkelanjutan (DoT, buff/debuff durasi panjang, field effect)",
+      "Bisa single target atau AoE",
+      "Cooldown panjang: min 5, max 15 turn",
+    ],
+    contohSkill: [
+      { class: "Warrior", name: "Dragon's Rage",   desc: "High damage + Self ATK Buff beberapa turn" },
+      { class: "Mage",    name: "Meteor Shower",   desc: "High damage + Burning DoT di area (AoE)" },
+      { class: "Priest",  name: "Sanctuary",       desc: "Heal overtime besar di area (AoE)" },
+    ],
+  },
+  {
+    id: "wild",
+    title: "Aksi Khusus /\nWild Action",
+    icon: "🎯",
+    color: "#ff7043",
+    colorDim: "#ff704322",
+    ap: "1 AP",
+    mana: "No Mana",
+    tagline: "Utility Action —\nNon-Combat Specialty",
+    karakteristik: [
+      "Tidak untuk damage langsung",
+      "Bisa berupa buff, heal ringan, debuff, provoke, taunt, escape",
+      "Tidak ada batasan target",
+      "Bisa digunakan setiap giliran (no cooldown)",
+    ],
+    contohSkill: [
+      { class: "Warrior",  name: "Battle Cry",  desc: "Boost ATK sendiri selama 1 turn" },
+      { class: "Priest",   name: "Quick Mend",  desc: "Heal ringan satu target" },
+      { class: "Guardian", name: "Taunt",       desc: "Paksa musuh menyerang kamu 1 turn" },
+    ],
+  },
+  {
+    id: "signature",
+    title: "Signature Move",
+    icon: "🗡️",
+    color: "#d4a843",
+    colorDim: "#d4a84322",
+    ap: "Special",
+    mana: "Unlock Lv.100",
+    tagline: "Your Legend —\nThe Ultimate Signature",
+    karakteristik: [
+      "Hanya bisa dibuat setelah mencapai Level 100",
+      "Unik per player — tidak bisa disamakan satu sama lain",
+      "Harus disetujui oleh Arbiter / GM sebelum digunakan",
+      "Cara mencapainya berbeda untuk setiap player",
+    ],
+    contohSkill: [
+      { class: "Warrior",  name: "Last Conqueror",  desc: "Serangan legendaris yang menentukan nasib pertarungan" },
+      { class: "Mage",     name: "Astral Collapse",  desc: "Menarik kekuatan bintang untuk menghancurkan dimensi" },
+      { class: "Archer",   name: "Infinity Arrow",   desc: "Satu panah yang menembus seluruh waktu dan ruang" },
+    ],
+  },
+];
+
