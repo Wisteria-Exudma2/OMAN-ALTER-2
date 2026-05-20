@@ -782,8 +782,9 @@ function renderSkillDisplay(type) {
   const area = document.getElementById('skill-display-area');
   if (type === 'system') {
     area.innerHTML = `
-      <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--text-dim);margin-bottom:16px;">8 SKILL SLOTS — DISTRIBUSI AKSI</div>
-      <div class="skill-slot-grid">
+      <!-- Slot Overview Cards -->
+      <div style="font-family:var(--font-ui);font-size:0.62rem;letter-spacing:0.18em;color:var(--text-dim);margin-bottom:14px;">⚡ DISTRIBUSI 8 SKILL SLOT</div>
+      <div class="skill-slot-grid" style="margin-bottom:40px;">
         ${SKILL_SYSTEM.slots.map(s => `
           <div class="skill-slot-card">
             <div class="skill-slot-icon">${s.icon}</div>
@@ -795,23 +796,56 @@ function renderSkillDisplay(type) {
         `).join('')}
       </div>
 
+      <!-- Unlock Per Level Table (styled like screenshot) -->
+      <div class="skill-unlock-section">
+        <div class="skill-unlock-title">
+          <span class="skill-unlock-title-icon">🎯</span>
+          <span>Unlock Per Level</span>
+        </div>
+        <div class="skill-unlock-table">
+          ${SKILL_SYSTEM.unlockTable.map((row, idx) => `
+            <div class="skill-unlock-row${idx % 2 === 1 ? ' alt' : ''}" id="skill-row-lv${row.level}">
+              <div class="skill-unlock-lv" style="color:${row.color};">Lv.${row.level}</div>
+              <div class="skill-unlock-icon-wrap" style="background:${row.color}18; border-color:${row.color}40;">
+                <span class="skill-unlock-type-icon">${row.icon}</span>
+              </div>
+              <div class="skill-unlock-desc">${row.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Damage Formula -->
       <div class="grid-2 mt-24">
         <div class="card">
-          <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px;">🔓 UNLOCK LEVEL SKILL</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            ${SKILL_SYSTEM.unlockLevels.map(lv => `
-              <span style="font-family:var(--font-ui);font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);color:var(--gold);">Lv.${lv}</span>
-            `).join('')}
-          </div>
-        </div>
-        <div class="card">
           <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px;">📐 FORMULA DAMAGE</div>
-          <div style="font-size:0.78rem;line-height:2;">
+          <div style="font-size:0.78rem;line-height:2.2;">
             <div>⚔️ PHYS DMG = <span style="color:var(--gold);">${SKILL_SYSTEM.damageFormula.phys}</span></div>
             <div>✨ MAG DMG = <span style="color:var(--gold);">${SKILL_SYSTEM.damageFormula.magic}</span></div>
             <div>🔻 MIN DMG = <span style="color:var(--gold);">${SKILL_SYSTEM.damageFormula.minDmg}</span></div>
             <div>🔺 MAX DMG = <span style="color:var(--gold);">${SKILL_SYSTEM.damageFormula.maxDmg}</span></div>
             <div>💥 CRIT DMG = <span style="color:var(--gold);">${SKILL_SYSTEM.damageFormula.critDmg}</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px;">🏷️ LEGENDA TIPE AKSI</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${[
+              { icon:'🛡️', label:'Nova (Aksi Normal)',        color:'#4fc3f7', ap:'2 AP / No Mana' },
+              { icon:'🎯', label:'Wild (Aksi Khusus)',         color:'#ff7043', ap:'1 AP / No Mana' },
+              { icon:'💥', label:'Supernova (Aksi Kuat)',      color:'#ff5252', ap:'3 AP / Mid Mana' },
+              { icon:'⚡', label:'HyperNova (Ultimate)',        color:'#ffd740', ap:'4–5 AP / High Mana' },
+              { icon:'💎', label:'Mastery Bonus',              color:'#e040fb', ap:'Passive' },
+              { icon:'🗡️', label:'Signature Move',             color:'#d4a843', ap:'Lv.100 Unlock' },
+            ].map(t => `
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:1rem;width:22px;text-align:center;">${t.icon}</span>
+                <div style="flex:1;">
+                  <div style="font-family:var(--font-ui);font-size:0.62rem;font-weight:700;color:${t.color};">${t.label}</div>
+                  <div style="font-size:0.65rem;color:var(--text-dim);">${t.ap}</div>
+                </div>
+              </div>
+            `).join('')}
           </div>
         </div>
       </div>`;
