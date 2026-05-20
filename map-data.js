@@ -15,7 +15,7 @@ const WORLD_MAPS = {
     level: 0,
     year: 2500,
     subtitle: 'Year 2500 RA — A Post-Apocalyptic World of Seven Factions',
-    imageUrl: 'assets/maps/oman-world.jpg',
+    imageUrl: 'https://hyutzatopojxwpyvdclp.supabase.co/storage/v1/object/public/OMAN%20IMG/OMAN%20WORLD%20MAP.png',
     description: 'Dunia OMAN yang luas — terdiri dari 7 faksi besar yang menguasai wilayah masing-masing.',
     gridConfig: {
       cols: 26,      // A-Z
